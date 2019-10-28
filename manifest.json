@@ -16,7 +16,7 @@
     {
       "matches": ["https://schoology.montville.net/*"],
       "css": ["./src/css/main.css"],
-      "js": ["./src/lib/jquery.min.js", "./src/content_script.js"],
+      "js": ["./src/lib/jquery.min.js", "./src/Helpers.js", "./src/content_script.js"],
       "run_at": "document_end"
     }
 ],
