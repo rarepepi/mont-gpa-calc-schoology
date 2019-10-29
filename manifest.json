@@ -5,23 +5,41 @@
   "version": "1",
   "author": "Pepi Martinez",
   "background": {
-    "scripts": ["./src/lib/jquery.min.js", "./src/background.js"],
+    "scripts": [
+      "./src/lib/jquery.min.js",
+      "./src/background.js"
+    ],
     "persistent": false
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage",
+    "declarativeContent"
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "content_scripts": [
     {
-      "matches": ["https://schoology.montville.net/*"],
-      "css": ["./src/css/main.css"],
-      "js": ["./src/lib/jquery.min.js", "./src/Helpers.js", "./src/content_script.js"],
+      "matches": [
+        "https://schoology.montville.net/grades/grades"
+      ],
+      "css": [
+        "./src/css/main.css"
+      ],
+      "js": [
+        "./src/lib/jquery.min.js",
+        "./src/Helpers.js",
+        "./src/content_script.js"
+      ],
       "run_at": "document_end"
     }
-],
+  ],
   "page_action": {
+    "default_popup": "./src/popup/popup.html",
     "default_icon": "./src/img/icon.png",
     "default_title": "Montville GPA Schoology"
-    }
+  },
+  "options_ui": {
+    "page": "./src/options/options.html",
+    "open_in_tab": false
+  }
 }
