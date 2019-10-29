@@ -1,3 +1,5 @@
+'use strict';
+
 var _gaq = _gaq || [];
 _gaq.push(['_setAccount', 'UA-99015999-1']);
 _gaq.push(['_trackPageview']);
@@ -9,21 +11,22 @@ _gaq.push(['_trackPageview']);
 })();
 
 
+
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
-      chrome.declarativeContent.onPageChanged.addRules([
-        {
-          conditions: [
-            new chrome.declarativeContent.PageStateMatcher({
-              pageUrl: {
-                hostEquals: 'schoology.montville.net',
-                schemes: ['https'],
-                pathPrefix: 'grades/grades'
-              },
-            })
-          ],
-          actions: [ new chrome.declarativeContent.ShowPageAction() ]
-        }
-      ]);
-    });
+  chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
+    chrome.declarativeContent.onPageChanged.addRules([
+      {
+        conditions: [
+          new chrome.declarativeContent.PageStateMatcher({
+            pageUrl: {
+              hostEquals: 'schoology.montville.net',
+              schemes: ['https'],
+              pathPrefix: 'grades/grades'
+            },
+          })
+        ],
+        actions: [ new chrome.declarativeContent.ShowPageAction() ]
+      }
+    ]);
   });
+});
