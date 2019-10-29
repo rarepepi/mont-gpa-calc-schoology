@@ -1,3 +1,33 @@
+function changeTheme(){
+  chrome.storage.local.get(['darkMode'],
+      function(settings) {
+        if(settings['darkMode']) {
+          $("#body").css("background-color", "#333");
+          $("#body").css("color", "#faf9f7");
+          $("#main-content-wrapper").css("background-color", "#333");
+          $("#center-top").css("background", "#333");
+          $(".tabs").css("background-color", "#333");
+          $(".summary-course").css("background-color", "#333");
+          $(".course-grade-text").css("color", "#faf9f7");
+          $("#center-top").css("background-color", "#333");
+          $("a[class='sExtlink-processed'][href='#']").css("color", "#faf9f7")
+        }
+      }
+  );
+}
+
+function animateGpaElementOntoPage(gpa) {
+  $("h2[class='page-title ']").remove();
+  $("#gpa").remove();      
+  let gpaElement = "<h1 id='gpa' style='display:block;color:#ffffff;background-color:#095740;height:10px;text-align:center;line-height:100px;width:50px;border-radius:25px;margin:0 auto;margin-top:10px;  box-shadow: 2px 2px 4px rgba(0, 0, 0, .7);'> GPA: ";
+  gpaElement += gpa.toFixed(2);
+  gpaElement += "</h1>";
+  $("#center-top").append($(gpaElement));
+  gpaDiv = $("#gpa");
+  gpaDiv.animate({height: '100px', opacity: '0.6'}, "slow");
+  gpaDiv.animate({width: '250px', opacity: '1'}, "fast");
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -11,6 +41,8 @@ function onLoad(a) {
 }
 
 function calculateGpa() {
+  chrome.storage.onChanged.addListener(changeTheme);
+  changeTheme();
   sleep(2000).then(() => { // Wait for javascript on page to load
     // Get the list of classes and the list of grades
     const raw_grades = $(".course-grade-value")
@@ -46,24 +78,11 @@ function calculateGpa() {
 
       gpa = quality_points / total_credits;
     }
-    console.log(gpa);
-    console.log(total_credits);
-    console.log(quality_points);
-
 
     // Load css animation on dom inject of the new gpa
-
-    // if(gpa > 0){
-    //   $("p[style='text-align: center']").remove();
-    //   $("#gpa").remove();
-    //   let html = '<h1 id="gpa" style="color:#ffffff;background-color:#019BC6;height:10px;text-align:center;line-height:100px;width:50px;border-radius:25px;margin:0 auto;margin-top:10px;  box-shadow: 2px 2px 4px rgba(0, 0, 0, .4);"> GPA: ';
-    //   html += gpa.toFixed(2);
-    //   html += "</h1>";
-    //   $('h2[class="page-title "]').append($(html));
-    //   gpaDiv = $("#gpa");
-    //   gpaDiv.animate({height: '100px', opacity: '0.6'}, "slow");
-    //   gpaDiv.animate({width: '250px', opacity: '1'}, "fast");
-    // }
+    if(gpa > 0) {
+      animateGpaElementOntoPage(gpa);
+    }
   })
 }
 
