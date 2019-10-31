@@ -1,7 +1,7 @@
 'use strict';
 
 var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-99015999-1']);
+_gaq.push(['_setAccount', 'UA-99015999-2']);
 _gaq.push(['_trackPageview']);
 
 (function() {
@@ -9,8 +9,6 @@ _gaq.push(['_trackPageview']);
   ga.src = 'https://ssl.google-analytics.com/ga.js';
   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 })();
-
-
 
 chrome.runtime.onInstalled.addListener(function() {
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
