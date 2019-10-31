@@ -14,7 +14,8 @@
   "permissions": [
     "activeTab",
     "storage",
-    "declarativeContent"
+    "declarativeContent",
+    "tabs"
   ],
   "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
   "content_scripts": [
@@ -36,7 +37,10 @@
   "page_action": {
     "default_popup": "./src/popup/popup.html",
     "default_icon": "./src/img/icon.png",
-    "default_title": "Montville GPA Schoology"
+    "default_title": "Mont GPA Calc Schoology"
+  },
+  "icons": {
+    "32": "./src/img/icon.png"
   },
   "options_ui": {
     "page": "./src/options/options.html",
